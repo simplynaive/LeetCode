@@ -2,7 +2,7 @@ import time
 import copy
 
 class Solution:
-    # iterative method
+    # recursive method
     def search(self, nums, S, index):
         if index == len(nums):
             if S not in self.results:
@@ -21,7 +21,7 @@ class Solution:
         self.search(sorted(nums), [], 0)
         return self.results
 
-    # non-iterative method
+    # non-recursive method
     # def subsets(self, nums):
     #     nums.sort()
     #     self.results = [[]]
