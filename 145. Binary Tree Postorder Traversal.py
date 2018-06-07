@@ -18,14 +18,15 @@ class Solution(object):
         res = []
         stack = []
         while stack or root:
-            while root.left:
-                stack.append(root)
+            while root:
+                stack.append((root, False))
                 root = root.left
-            while root.right:
-                stack.append(root)
-                root = root.right
-            node = stack.pop()
-            res.append(node.val)
+            top, visited = stack.pop()
+            if not top.right or visited:
+                res.append(top.val)
+            else:
+                stack.append((top, True))
+                root = top.right
         return res
 
     # # recursive
