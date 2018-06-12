@@ -9,10 +9,8 @@ class Solution(object):
         if len(S) != len(shifts) or not S:
             return None
         alphabeta = [chr(i) for i in range(97, 123)]
-        S_list = []
+        S_list = list(S)
         result = []
-        for character in S:
-            S_list.append(character)
         for i in range(len(S_list)):
             if shifts[i] > pow(10, 9):
                 return None
