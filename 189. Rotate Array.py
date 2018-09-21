@@ -9,7 +9,7 @@ class Solution(object):
         :rtype: void Do not return anything, modify nums in-place instead.
         """
         nums[:] = nums[len(nums) - k:] + nums[:len(nums) - k]
-        return
+
 
 if __name__ == "__main__":
     nums = [1, 2, 3, 4, 5, 6, 7]
