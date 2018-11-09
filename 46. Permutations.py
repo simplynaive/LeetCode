@@ -1,5 +1,5 @@
 import time
-import copy
+
 
 class Solution:
     def permute(self, nums):
@@ -19,7 +19,6 @@ class Solution:
 
         for i in range(len(nums)):
             self.search(nums[:i] + nums[i + 1:], S + [nums[i]], self.results)
-
 
 
 if __name__ == "__main__":
