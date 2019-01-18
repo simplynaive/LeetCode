@@ -14,20 +14,35 @@ class Solution(object):
         :type root: TreeNode
         :rtype: void Do not return anything, modify root in-place instead.
         """
+        # if not root:
+        #     return
+        # self.flatten(root.left)
+        # self.flatten(root.right)
+        # node = root
+        # if not node.left:
+        #     return
+        # node = node.left
+        # while node.right:
+        #     node = node.right
+        # node.right = root.right
+        # root.right = root.left
+        # root.left = None
+        # return
+
         if not root:
             return
-        self.flatten(root.left)
-        self.flatten(root.right)
-        node = root
-        if not node.left:
-            return
-        node = node.left
-        while node.right:
-            node = node.right
-        node.right = root.right
-        root.right = root.left
-        root.left = None
-        return
+        res = []
+        self.dfs(root, res)
+        for i in range(len(res) - 1):
+            res[i].right = res[i + 1]
+            res[i].left = None
+        res[-1].left = None
+
+    def dfs(self, node, res):
+        if node:
+            res.append(node)
+            self.dfs(node.left, res)
+            self.dfs(node.right, res)
 
 
 if __name__ == "__main__":
