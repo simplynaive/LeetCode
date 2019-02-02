@@ -12,17 +12,36 @@ class Solution(object):
         :type l2: ListNode
         :rtype: ListNode
         """
+        dummyhead = ListNode(0)
+        curr = dummyhead
+        p, q = l1, l2
+        carry = 0
+        while p or q:
+            x = p.val if p else 0
+            y = q.val if q else 0
+            curr_sum = carry + x + y
+            carry = curr_sum // 10
+            curr.next = ListNode(curr_sum % 10)
+            curr = curr.next
+            p = p.next if p else p
+            q = q.next if q else q
+        if carry > 0:
+            curr.next = ListNode(carry)
+        return dummyhead.next
 
 
 if __name__ == "__main__":
-    nums = [-10, -3, 0, 5, 9]
-    t0 = ListNode(-10)
-    t1 = ListNode(-3)
-    t2 = ListNode(0)
-    t3 = ListNode(5)
-    t4 = ListNode(9)
-    t0.next = t1
-    t1.next = t2
-    t2.next = t3
-    t3.next = t4
-    print(Solution().sortedListToBST(t0))
+    # Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+    # Output: 7 -> 0 -> 8
+    # Explanation: 342 + 465 = 807.
+    l1 = ListNode(2)
+    l10 = ListNode(4)
+    l11 = ListNode(3)
+    l2 = ListNode(5)
+    l20 = ListNode(6)
+    l21 = ListNode(4)
+    l1.next = l10
+    l10.next = l11
+    l2.next = l20
+    l20.next = l21
+    print(Solution().addTwoNumbers(l1, l2))
