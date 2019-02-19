@@ -8,7 +8,7 @@ class Solution(object):
             return 0
         res = 0
         for a in s:
-            res = 26 * res + (ord(a) - 64)
+            res = 26 * res + (ord(a) - ord('A') + 1)
         return res
 
 
