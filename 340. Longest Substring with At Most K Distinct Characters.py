@@ -5,9 +5,7 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        
-
-    if not s or k == 0:
+        if not s or k == 0:
             return 0
         res = 1
         used = dict()
