@@ -12,22 +12,40 @@ class Solution(object):
         :type root: TreeNode
         :rtype: bool
         """
+    #     # recursive
+    #     if not root:
+    #         return True
+    #     return self.helper(root.left, root.right)
+    #
+    # def helper(self, left, right):
+    #     if not left and not right:
+    #         return True
+    #     if not left or not right:
+    #         return False
+    #
+    #     if left.val == right.val:
+    #         inner = self.helper(left.right, right.left)
+    #         outer = self.helper(left.left, right.right)
+    #
+    #         return outer and inner
+    #     return False
+
+         # iterative
         if not root:
             return True
-        return self.helper(root.left, root.right)
+        stack = [[root, root]]
+        while stack:
+            node1, node2 = stack.pop()
+            if not node1 and not node2:
+                continue
+            elif not node1 or not node2:
+                return False
+            elif node1.val != node2.val:
+                return False
 
-    def helper(self, left, right):
-        if not left and not right:
-            return True
-        if not left or not right:
-            return False
-
-        if left.val == right.val:
-            inner = self.helper(left.right, right.left)
-            outer = self.helper(left.left, right.right)
-
-            return outer and inner
-        return False
+            stack.append([node1.left, node2.right])
+            stack.append([node1.right, node2.left])
+        return True
 
 
 if __name__ == "__main__":

@@ -15,6 +15,7 @@ class Solution:
             if nums1[i] == nums2[j]:
                 res.append(nums1[i])
                 i += 1
+                j += 1
             elif nums1[i] < nums2[j]:
                 i += 1
             elif nums1[i] > nums2[j]:
