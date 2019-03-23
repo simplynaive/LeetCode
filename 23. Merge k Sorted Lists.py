@@ -11,7 +11,7 @@ class Solution(object):
         :type lists: List[ListNode]
         :rtype: ListNode
         """
-        cur = ListNode(-float('inf'))
+        # cur = ListNode(-float('inf'))
 
         def mergeTwoLists(l1, l2):
             """
@@ -31,9 +31,13 @@ class Solution(object):
             cur.next = l1 or l2
             return root.next
 
-        for i in range(len(lists)):
-            cur = mergeTwoLists(lists[i], cur)
-        return cur.next
+        amount = len(lists)
+        interval = 1
+        while interval < amount:
+            for i in range(0, amount - interval, interval * 2):
+                lists[i] = mergeTwoLists(lists[i], lists[i + interval])
+            interval *= 2
+        return lists[0] if amount > 0 else lists
 
 
 if __name__ == "__main__":
