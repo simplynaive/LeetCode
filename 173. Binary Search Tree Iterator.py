@@ -1,5 +1,3 @@
-
-
 # Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x):
@@ -14,42 +12,45 @@ class BSTIterator(object):
         :type root: TreeNode
         """
         self.stack = []
-        self.curt = root
+        while root:
+            self.stack.append(root)
+            root = root.left
+        res = []
+        for s in self.stack:
+            res.append(s.val)
+        print(res)
 
     def hasNext(self):
         """
         :rtype: bool
         """
-        return self.curt is not None or len(self.stack) > 0
+        return len(self.stack) > 0
 
     def next(self):
         """
         :rtype: int
         """
-        while self.curt is not None:
-            self.stack.append(self.curt)
-            self.curt = self.curt.left
-        self.curt = self.stack.pop()
-        nxt = self.curt
-        self.curt = self.curt.right
-        return nxt.val
+        node = self.stack.pop()
+        right = node.right
+        while right:
+            self.stack.append(right)
+            right = right.left
+        return node.val
 
 
 if __name__ == "__main__":
     # build binary tree
-    #     1
+    #     7
     #    / \
-    #   2   3
+    #   5   9
     #  / \
-    # 4   5
-    # Preorder: 1, 2, 4, 5, 3
-    # Inorder: 4, 2, 5, 1, 3
-    # Postorder: 4, 5, 2, 3, 1
-    t1 = TreeNode(1)
-    t2 = TreeNode(2)
-    t3 = TreeNode(3)
+    # 4   6
+    # Inorder: 4, 5, 6, 7, 9
+    t1 = TreeNode(7)
+    t2 = TreeNode(5)
+    t3 = TreeNode(9)
     t4 = TreeNode(4)
-    t5 = TreeNode(5)
+    t5 = TreeNode(6)
     t1.left = t2
     t1.right = t3
     t2.left = t4

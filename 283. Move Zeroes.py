@@ -1,16 +1,31 @@
 class Solution:
+    # def moveZeroes(self, nums):
+    #     """
+    #     :type nums: List[int]
+    #     :rtype: void Do not return anything, modify nums in-place instead.
+    #     """
+    #     j = 0
+    #     for i in range(len(nums)):
+    #         if nums[j] == 0:
+    #             nums.pop(j)
+    #             nums.append(0)
+    #             j -= 1
+    #         j += 1
+    #     return nums
+
     def moveZeroes(self, nums):
         """
         :type nums: List[int]
-        :rtype: void Do not return anything, modify nums in-place instead.
+        :rtype: None Do not return anything, modify nums in-place instead.
         """
-        j = 0
-        for i in range(len(nums)):
-            if nums[j] == 0:
-                nums.pop(j)
-                nums.append(0)
-                j -= 1
-            j += 1
+        if not nums:
+            return nums
+        i = 0
+        for n in nums:
+            if n != 0:
+                nums[i] = n
+                i += 1
+        nums[i:] = [0] * (len(nums) - i)
         return nums
 
 

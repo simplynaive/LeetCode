@@ -6,6 +6,25 @@ class ListNode(object):
 
 
 class Solution(object):
+    # def reverseList(self, head):
+    #     """
+    #     :type head: ListNode
+    #     :rtype: ListNode
+    #     """
+    #     if not head:
+    #         return
+    #     values = [head.val]
+    #     while head.next:
+    #         values.append(head.next.val)
+    #         head = head.next
+    #     a = []
+    #     a.append(ListNode(values[0]))
+    #     for i in range(1, len(values)):
+    #         a.append(ListNode(values[i]))
+    #         a[i].next = a[i - 1]
+    #     return a[-1]
+
+    # inplace
     def reverseList(self, head):
         """
         :type head: ListNode
@@ -13,16 +32,14 @@ class Solution(object):
         """
         if not head:
             return
-        values = [head.val]
-        while head.next:
-            values.append(head.next.val)
-            head = head.next
-        a = []
-        a.append(ListNode(values[0]))
-        for i in range(1, len(values)):
-            a.append(ListNode(values[i]))
-            a[i].next = a[i - 1]
-        return a[-1]
+        pre = None
+        curr = head
+        while curr:
+            t = curr.next
+            curr.next = pre
+            pre = curr
+            curr = t
+        return pre
 
 
 if __name__ == "__main__":
