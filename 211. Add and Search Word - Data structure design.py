@@ -1,10 +1,19 @@
+import collections
+
+
+class TrieNode():
+    def __init__(self):
+        self.children = collections.defaultdict(TrieNode)
+        self.isWord = False
+
+
 class WordDictionary(object):
 
     def __init__(self):
         """
         Initialize your data structure here.
         """
-        self.trie = {}
+        self.root = TrieNode()
 
     def addWord(self, word):
         """
@@ -12,12 +21,10 @@ class WordDictionary(object):
         :type word: str
         :rtype: None
         """
-        t = self.trie
-        for c in word:
-            if c not in t:
-                t[c] = {}
-            t = t[c]
-        t['#'] = '#'
+        node = self.root
+        for w in word:
+            node = node.children[w]
+        node.isWord = True
 
     def search(self, word):
         """
@@ -25,24 +32,24 @@ class WordDictionary(object):
         :type word: str
         :rtype: bool
         """
-        t = self.trie
+        node = self.root
+        self.res = False
+        self.dfs(node, word)
+        return self.res
 
-        def find(t, word):
-            # print(word)
-            if not word:
-                return '#' in t
-            c, word = word[0], word[1:]
-            if c != '.':
-                return c in t and find(t[c], word)
-            else:
-                print(t)
-                for v in t.values():
-                    print(v, t, word)
-                    if find(v, word):
-                        return True
-            return True
-
-        return find(t, word)
+    def dfs(self, node, word):
+        if not word:
+            if node.isWord:
+                self.res = True
+            return
+        if word[0] == ".":
+            for n in node.children.values():
+                self.dfs(n, word[1:])
+        else:
+            node = node.children.get(word[0])
+            if not node:
+                return
+            self.dfs(node, word[1:])
 
 
 if __name__ == "__main__":

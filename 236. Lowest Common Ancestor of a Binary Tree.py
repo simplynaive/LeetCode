@@ -16,21 +16,43 @@ class Solution(object):
         :type q: TreeNode
         :rtype: TreeNode
         """
+        # if not root:
+        #     return None
+        # if root is p or root is q:
+        #     return root
+        #
+        # left = self.lowestCommonAncestor(root.left, p, q)
+        # right = self.lowestCommonAncestor(root.right, p, q)
+        #
+        # if left is not None and right is not None:
+        #     return root
+        # if left is not None:
+        #     return left
+        # if right is not None:
+        #     return right
+        # return None
+
         if not root:
             return None
         if root is p or root is q:
             return root
 
-        left = self.lowestCommonAncestor(root.left, p, q)
-        right = self.lowestCommonAncestor(root.right, p, q)
+        self.res = None
 
-        if left is not None and right is not None:
-            return root
-        if left is not None:
-            return left
-        if right is not None:
-            return right
-        return None
+        def dfs(node):
+            if not node:
+                return False
+            left = dfs(node.left)
+            right = dfs(node.right)
+            mid = node == p or node == q
+
+            if mid + left + right >= 2:
+                self.res = node
+
+            return mid or left or right
+
+        dfs(root)
+        return self.res
 
 
 if __name__ == "__main__":
