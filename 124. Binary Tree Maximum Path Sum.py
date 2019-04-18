@@ -44,6 +44,6 @@ if __name__ == "__main__":
     t5 = TreeNode(5)
     t1.left = t2
     t1.right = t3
-    # t2.left = t4
-    # t2.right = t5
+    t2.left = t4
+    t2.right = t5
     print(Solution().maxPathSum(t1))

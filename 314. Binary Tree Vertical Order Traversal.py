@@ -19,7 +19,7 @@ class Solution(object):
 
         stack = [[root, 0]]
         while stack:
-            root, level = stack.pop(0)
+            root, level = stack.pop()
             if root:
                 if level not in dic:
                     dic[level] = [root.val]
