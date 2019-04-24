@@ -4,13 +4,19 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
-        d = dict()
-        for n in nums:
-            if n in d.keys():
-                d[n] += 1
-            else:
-                d[n] = 1
-        return list({k: v for k, v in d.items() if v == 1}.keys())[0]
+        # d = dict()
+        # for n in nums:
+        #     if n in d.keys():
+        #         d[n] += 1
+        #     else:
+        #         d[n] = 1
+        # return list({k: v for k, v in d.items() if v == 1}.keys())[0]
+
+        # bit manipulation
+        a = 0
+        for i in nums:
+            a ^= i
+        return a
 
     #     def singleNumber(self, nums):
     #         """
