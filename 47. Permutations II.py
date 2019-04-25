@@ -1,8 +1,5 @@
-import time
-
-
-class Solution:
-    def permute(self, nums):
+class Solution(object):
+    def permuteUnique(self, nums):
         """
         :type nums: List[int]
         :rtype: List[List[int]]
@@ -13,7 +10,8 @@ class Solution:
 
         def dfs(nums, path):
             if not nums:
-                res.append(path)
+                if path not in res:
+                    res.append(path)
                 return
 
             for i in range(len(nums)):
@@ -24,9 +22,5 @@ class Solution:
 
 
 if __name__ == "__main__":
-    nums = [1, 2, 3]
-    start = time.time()
-    solution = Solution()
-    print(solution.permute(nums))
-    end = time.time()
-    print("runtime = ", end - start)
+    nums = [1, 1, 2]
+    print(Solution().permuteUnique(nums))

@@ -6,10 +6,7 @@ class Solution(object):
         """
         d = dict()
         for c in s:
-            if c not in d.keys():
-                d[c] = 1
-            else:
-                d[c] += 1
+            d[c] = d.get(c, 0) + 1
         for i in range(len(s)):
             if d[s[i]] == 1:
                 return i
